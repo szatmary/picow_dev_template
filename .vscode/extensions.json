@@ -1,7 +1,8 @@
 {
   "recommendations": [
     "ms-vscode.cpptools-extension-pack",
-    "chipcode-nl.picoprobe-mac",
-    "marus25.cortex-debug"
+    "marus25.cortex-debug",
+    "chris-hock.pioasm",
+    // "chipcode-nl.picoprobe-mac"
   ]
 }
