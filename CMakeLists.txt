@@ -9,7 +9,7 @@ include(FetchContent)
 FetchContent_Declare(
   freertos
   GIT_REPOSITORY https://github.com/FreeRTOS/FreeRTOS-Kernel.git
-  GIT_TAG  V10.5.1
+  GIT_TAG V10.5.1
 )
 FetchContent_Populate(freertos)
 add_subdirectory("${freertos_SOURCE_DIR}/portable/ThirdParty/GCC/RP2040" FreeRTOS-Kernel)
@@ -35,9 +35,9 @@ target_include_directories(${NAME} PRIVATE
     "${freertos_SOURCE_DIR}/portable/ThirdParty/GCC/RP2040/include/"
     ${CMAKE_CURRENT_LIST_DIR}
 )
-target_link_libraries(${NAME} PRIVATE
-    pico_stdlib
-    # pico_cyw43_arch_lwip_threadsafe_background
+
+target_link_libraries(${NAME}
     pico_cyw43_arch_lwip_sys_freertos
+    pico_stdlib
     FreeRTOS-Kernel-Heap4
 )

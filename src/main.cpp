@@ -18,13 +18,21 @@ void blink_task(__unused void* params)
     }
 }
 
+void main_task(__unused void* params)
+{
+    cyw43_arch_init();
+    TaskHandle_t blink;
+    xTaskCreate(blink_task, "Blinky", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, &blink);
+    while (true) {
+        vTaskDelay(1000);
+    }
+}
+
 int main()
 {
     stdio_init_all();
-    cyw43_arch_init();
-    TaskHandle_t blink;
-    xTaskCreate(blink_task, "Blinky", configMINIMAL_STACK_SIZE, nullptr, tskIDLE_PRIORITY, &blink);
+    TaskHandle_t main;
+    xTaskCreate(main_task, "main", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, &main);
     vTaskStartScheduler();
-    cyw43_arch_deinit();
     return 0;
 }
